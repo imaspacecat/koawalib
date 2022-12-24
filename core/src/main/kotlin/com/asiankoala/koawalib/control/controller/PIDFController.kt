@@ -20,9 +20,6 @@ class PIDFController constructor(
     private var minInput: Double = 0.0
     private var maxInput: Double = 0.0
 
-    private var minOutput: Double = 0.0
-    private var maxOutput: Double = 0.0
-
     /**
      * Target position (that is, the controller setpoint).
      */
@@ -89,11 +86,6 @@ class PIDFController constructor(
                 pid.kD * (measuredVelocity?.let { targetVelocity - it } ?: errorDeriv) +
                 kV * targetVelocity + kA * targetAcceleration + kF(measuredPosition, measuredVelocity)
             val output = if (baseOutput epsilonEquals 0.0) 0.0 else baseOutput + sign(baseOutput) * kStatic
-
-//            Logger.addTelemetryData("kp", pid.kP * error)
-//            Logger.addTelemetryData("error", error)
-//            Logger.addTelemetryData("curr", measuredPosition)
-//            Logger.addTelemetryData("target", targetPosition)
 
             output
         }
